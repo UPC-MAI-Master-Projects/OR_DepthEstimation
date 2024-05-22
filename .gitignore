@@ -3,3 +3,5 @@ cloth3d/Samples
 __pycache__
 cloth3d++_subset
 best_model.h5
+*.tfrecords
+logs
