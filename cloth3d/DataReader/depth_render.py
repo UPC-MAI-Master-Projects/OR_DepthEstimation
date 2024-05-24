@@ -66,3 +66,4 @@ class Render:
         )
         #depth = tf.clip_by_value(depth, 0, self.scene.max_depth)
         return depth
+    

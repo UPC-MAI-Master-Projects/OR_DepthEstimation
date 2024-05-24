@@ -16,7 +16,7 @@ Correspondence between mesh and UV map is implicit in F to Ft correspondences
 If no UV map data in .obj file, it shall return Vt=None and Ft=None
 """
 def readOBJ(file):
-	V, Vt, F, Ft = [], [], [], []
+	V, Vt, F, Ft, N = [], [], [], [], []
 	with open(file, 'r') as f:
 		T = f.readlines()
 	for t in T:
@@ -37,11 +37,18 @@ def readOBJ(file):
 			if '/' in t:
 				f = [int(n[1]) - 1 for n in idx]
 				Ft += [f]
+		elif t.startswith('vn '):
+			n = [float(n) for n in t.replace('vn ','').split(' ')]
+			N += [n]
 	V = np.array(V, np.float32)
 	Vt = np.array(Vt, np.float32)
 	if Ft: assert len(F) == len(Ft), 'Inconsistent .obj file, mesh and UV map do not have the same number of faces' 
 	else: Vt, Ft = None, None
-	return V, F, Vt, Ft
+	if N: 
+		N = np.array(N, np.float32)
+		assert len(V) == len(N), 'Inconsistent .obj file, different number of vertices and normals' 
+	else: N = None
+	return V, F, Vt, Ft, N
 
 """
 Writes OBJ files
