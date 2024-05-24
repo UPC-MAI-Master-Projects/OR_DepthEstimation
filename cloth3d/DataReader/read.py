@@ -159,7 +159,8 @@ class DataReader:
 		camLoc = info['camLoc']
 		# Camera projection matrix
 		return proj(camLoc)
-		
+	
+
 # TESTING
 if __name__ == '__main__':
 	sample = '135_02_s8'
@@ -168,5 +169,5 @@ if __name__ == '__main__':
 	
 	reader = DataReader()
 	F = reader.read_garment_topology(sample, garment)
-	Vt, Ft = reader.read_garment_UVMap(sample, garment)
+	Vt, Ft, N = reader.read_garment_UVMap(sample, garment)
 	C = reader.read_garment_vertex_colors(sample, garment, F, Vt, Ft)
