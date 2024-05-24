@@ -44,7 +44,8 @@ class DataReader:
 		pose = info['poses'][:, frame].reshape(self.smpl[gender].pose_shape)
 		shape = info['shape']
 		trans = info['trans'][:, frame].reshape(self.smpl[gender].trans_shape)
-		return gender, pose, shape, trans
+		camLoc = info['camLoc']
+		return gender, pose, shape, trans, camLoc
 	
 	"""
 	Computes human mesh for the specified sample and frame
@@ -60,7 +61,7 @@ class DataReader:
 		# Read sample data
 		info = self.read_info(sample)
 		# SMPL parameters
-		gender, pose, shape, trans = self.read_smpl_params(sample, frame)
+		gender, pose, shape, trans, _ = self.read_smpl_params(sample, frame)
 		# Compute SMPL
 		V, J = self.smpl[gender].set_params(pose=pose, beta=shape, trans=trans if absolute else None)
 		V -= J[0:1]
