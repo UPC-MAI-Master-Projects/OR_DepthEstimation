@@ -3,5 +3,9 @@ cloth3d/Samples
 __pycache__
 cloth3d++_subset
 best_model.h5
+best_model.keras
+best_model_AT.keras
+best_model_N.keras
+best_model_S.keras
 *.tfrecords
 logs
