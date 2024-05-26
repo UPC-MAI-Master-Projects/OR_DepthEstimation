@@ -56,9 +56,11 @@ def _int64_feature(value):
 
 def serialize_example(image_path, depth_path):
     img = tf.io.decode_image(tf.io.read_file(image_path), channels=3)
+
     img_bytes = img.numpy().tobytes()
 
-    depth = np.load(depth_path).astype(np.float32)
+    depth = np.load(depth_path)
+    depth = depth.astype(np.float32)
     depth_bytes = depth.tobytes()
 
     feature = {
