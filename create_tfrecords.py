@@ -24,7 +24,7 @@ for sample in training_folders:
         train_list += os.listdir(SRC + sample + '/image')
     except:
         pass
-train_list = list(map(lambda filename: filename[:-4], train_list))[0::80]
+train_list = list(map(lambda filename: filename[:-4], train_list))
 to_remove = [261, 259, 188]
 
 for x in to_remove:
@@ -36,7 +36,7 @@ for sample in validation_folders:
         validation_list += os.listdir(SRC + sample + '/image')
     except:
         pass
-validation_list = list(map(lambda filename: filename[:-4], validation_list))[0::30]
+validation_list = list(map(lambda filename: filename[:-4], validation_list))
 
 test_list = []
 for sample in test_folders:
@@ -44,7 +44,7 @@ for sample in test_folders:
         test_list += os.listdir(SRC + sample + '/image')
     except:
         pass
-test_list = list(map(lambda filename: filename[:-4], test_list))[0::30]
+test_list = list(map(lambda filename: filename[:-4], test_list))
 
 def _bytes_feature(value):
     """Returns a bytes_list from a string / byte."""
@@ -82,7 +82,7 @@ def create_tfrecord(data_list, root_dir, output_file):
             example = serialize_example(image_path, depth_path)
             writer.write(example)
 
-# Example usage:
-create_tfrecord(train_list, SRC, 'train.tfrecords')
-create_tfrecord(validation_list, SRC, 'validation.tfrecords')
-create_tfrecord(test_list, SRC, 'test.tfrecords')
+if __name__ == '__main__':
+    create_tfrecord(train_list, SRC, 'train.tfrecords')
+    create_tfrecord(validation_list, SRC, 'validation.tfrecords')
+    create_tfrecord(test_list, SRC, 'test.tfrecords')
