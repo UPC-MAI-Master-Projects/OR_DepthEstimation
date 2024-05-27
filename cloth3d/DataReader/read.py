@@ -13,11 +13,15 @@ class DataReader:
 	def __init__(self, SRC):
 		# Data paths
 		self.SRC = SRC
+		print('Reading data from:', SRC)
 		# SMPL model
 		smpl_path = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'smpl')
+		print('SMPL path:', smpl_path)
+		# Print files in smpl_path
+		print('SMPL files:', os.listdir(smpl_path))
 		self.smpl = {
-			'f': SMPLModel(os.path.join(smpl_path, 'model_f.pkl')),
-			'm': SMPLModel(os.path.join(smpl_path, 'model_m.pkl'))
+			'f': SMPLModel(os.path.join(smpl_path, 'model_f_unix.pkl')),
+			'm': SMPLModel(os.path.join(smpl_path, 'model_m_unix.pkl'))
 		}
 		
 	""" 
